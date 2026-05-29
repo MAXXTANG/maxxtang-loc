@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>maxxtang-loc — GitHub Lines of Code</title>
+  <meta name="description" content="@MAXXTANG 在 GitHub 上累積寫了多少行程式碼。月度快照，含歷史曲線與語言分佈。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📈%3C/text%3E%3C/svg%3E">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-2: #3fb950;
+      --warn: #d29922;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --panel: #f6f8fa;
+        --border: #d0d7de;
+        --text: #1f2328;
+        --muted: #656d76;
+        --accent: #0969da;
+        --accent-2: #1a7f37;
+        --warn: #9a6700;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+      line-height: 1.5;
+    }
+    main { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+    header h1 {
+      font-size: 28px; margin: 0 0 4px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    header p { color: var(--muted); margin: 0 0 28px; font-size: 14px; }
+    header a { color: var(--accent); text-decoration: none; }
+    header a:hover { text-decoration: underline; }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 28px; }
+    .stat {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px;
+    }
+    .stat .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+    .stat .value { font-size: 28px; font-weight: 600; margin-top: 4px; font-variant-numeric: tabular-nums; }
+    .stat .value.accent { color: var(--accent); }
+    .stat .sub { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+    .chart-card {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 8px; padding: 20px; margin-bottom: 20px;
+    }
+    .chart-card h2 { font-size: 16px; margin: 0 0 16px; }
+    .chart-wrap { position: relative; height: 280px; }
+    .chart-wrap.tall { height: 320px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .phase2 {
+      background: var(--panel); border: 1px dashed var(--border);
+      border-radius: 8px; padding: 16px 20px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      flex-wrap: wrap;
+    }
+    .phase2 input {
+      background: var(--bg); color: var(--text);
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 8px 12px; font-size: 14px; min-width: 200px;
+    }
+    .phase2 input:disabled { opacity: .5; cursor: not-allowed; }
+    .phase2 .badge {
+      background: var(--warn); color: var(--bg);
+      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+
+    footer { color: var(--muted); font-size: 12px; margin-top: 40px; text-align: center; }
+    footer a { color: var(--muted); }
+
+    .loading, .error {
+      text-align: center; padding: 40px 20px; color: var(--muted);
+    }
+    .error { color: #f85149; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>📈 maxxtang-loc</h1>
+      <p>
+        <a id="user-link" href="https://github.com/MAXXTANG">@MAXXTANG</a>
+        在 GitHub 累積寫了多少行程式碼 — 月度快照
+        · <a href="https://github.com/MAXXTANG/maxxtang-loc">原始碼</a>
+      </p>
+    </header>
+
+    <div id="root">
+      <div class="loading">載入中…</div>
+    </div>
+
+    <div class="phase2">
+      <div>
+        <span class="badge">Phase 2</span>
+        <span style="margin-left:8px; color: var(--muted); font-size: 13px;">
+          查詢任意 GitHub 帳號（近似值，即將開放）
+        </span>
+      </div>
+      <input type="text" placeholder="username" disabled>
+    </div>
+
+    <footer>
+      Data: <code>data/history.json</code> · Powered by
+      <a href="https://github.com/XAMPPRocky/tokei">tokei</a> +
+      <a href="https://www.chartjs.org/">Chart.js</a>
+    </footer>
+  </main>
+
+  <script>
+  (async () => {
+    const root = document.getElementById('root');
+    let data;
+    try {
+      const res = await fetch('./data/history.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      data = await res.json();
+    } catch (e) {
+      root.innerHTML = `<div class="error">無法載入 history.json：${e.message}</div>`;
+      return;
+    }
+
+    const snaps = (data.snapshots || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+    if (!snaps.length) {
+      root.innerHTML = `
+        <div class="loading">
+          還沒有快照 — 第一次跑 <code>snapshot.yml</code> workflow 後就會出現。
+        </div>`;
+      return;
+    }
+
+    const latest = snaps[snaps.length - 1];
+    const first = snaps[0];
+    document.getElementById('user-link').textContent = '@' + (data.user || 'MAXXTANG');
+    document.getElementById('user-link').href = 'https://github.com/' + (data.user || 'MAXXTANG');
+
+    // ── 上方統計卡 ───────────────────────────────────────────
+    const fmt = n => Number(n || 0).toLocaleString();
+    const growth = latest.total_lines - first.total_lines;
+    const growthLabel = snaps.length > 1
+      ? `+${fmt(growth)} 自 ${first.date}`
+      : '首次快照';
+
+    root.innerHTML = `
+      <div class="stats">
+        <div class="stat">
+          <div class="label">Total Lines</div>
+          <div class="value accent">${fmt(latest.total_lines)}</div>
+          <div class="sub">${growthLabel}</div>
+        </div>
+        <div class="stat">
+          <div class="label">Code</div>
+          <div class="value">${fmt(latest.total_code)}</div>
+          <div class="sub">${fmt(latest.total_comments)} 註解 · ${fmt(latest.total_blanks)} 空行</div>
+        </div>
+        <div class="stat">
+          <div class="label">Repos</div>
+          <div class="value">${latest.repo_count || 0}</div>
+          <div class="sub">非 fork、非 archived</div>
+        </div>
+        <div class="stat">
+          <div class="label">Latest Snapshot</div>
+          <div class="value" style="font-size:20px;">${latest.date}</div>
+          <div class="sub">${snaps.length} 筆歷史</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h2>歷史成長</h2>
+        <div class="chart-wrap tall"><canvas id="history-chart"></canvas></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="chart-card">
+          <h2>語言分佈（最新快照）</h2>
+          <div class="chart-wrap"><canvas id="lang-chart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h2>Repo 排行（Top 10 code lines）</h2>
+          <div class="chart-wrap"><canvas id="repo-chart"></canvas></div>
+        </div>
+      </div>
+    `;
+
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text').trim();
+    const muted = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim();
+    const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    Chart.defaults.color = muted;
+    Chart.defaults.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border').trim();
+    Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+
+    // ── 歷史成長 ────────────────────────────────────────────
+    new Chart(document.getElementById('history-chart'), {
+      type: 'line',
+      data: {
+        labels: snaps.map(s => s.date),
+        datasets: [{
+          label: 'Total lines',
+          data: snaps.map(s => s.total_lines),
+          borderColor: accent,
+          backgroundColor: accent + '33',
+          fill: true,
+          tension: 0.25,
+          pointRadius: 3,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: false, ticks: { callback: v => v.toLocaleString() } } }
+      }
+    });
+
+    // ── 語言分佈 ────────────────────────────────────────────
+    const langs = Object.entries(latest.by_language || {})
+      .map(([k, v]) => ({ name: k, code: v.code || 0 }))
+      .filter(l => l.code > 0)
+      .sort((a, b) => b.code - a.code)
+      .slice(0, 10);
+
+    const palette = ['#58a6ff','#3fb950','#d29922','#bc8cff','#f85149','#39c5cf','#ff7b72','#a5d6ff','#7ee787','#ffa657'];
+    new Chart(document.getElementById('lang-chart'), {
+      type: 'doughnut',
+      data: {
+        labels: langs.map(l => l.name),
+        datasets: [{
+          data: langs.map(l => l.code),
+          backgroundColor: palette,
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'right', labels: { boxWidth: 12 } } }
+      }
+    });
+
+    // ── Repo 排行 ───────────────────────────────────────────
+    const repos = Object.entries(latest.by_repo || {})
+      .map(([k, v]) => ({ name: k, code: v.code || 0 }))
+      .sort((a, b) => b.code - a.code)
+      .slice(0, 10);
+
+    new Chart(document.getElementById('repo-chart'), {
+      type: 'bar',
+      data: {
+        labels: repos.map(r => r.name),
+        datasets: [{
+          label: 'Code lines',
+          data: repos.map(r => r.code),
+          backgroundColor: accent,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { ticks: { callback: v => v.toLocaleString() } } }
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

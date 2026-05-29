@@ -1,0 +1,55 @@
+name: Monthly LOC Snapshot
+
+on:
+  schedule:
+    # 每月 1 號 UTC 03:00 跑（台灣時間 11:00）
+    - cron: '0 3 1 * *'
+  workflow_dispatch:
+    inputs:
+      include_private:
+        description: '包含私有 repo（需要 PAT secret REPO_PAT）'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write    # 要 commit 回 history.json
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tokei
+        run: |
+          curl -sSL -o /tmp/tokei.tar.gz \
+            https://github.com/XAMPPRocky/tokei/releases/download/v12.1.2/tokei-x86_64-unknown-linux-gnu.tar.gz
+          tar -xzf /tmp/tokei.tar.gz -C /tmp
+          sudo mv /tmp/tokei /usr/local/bin/
+          tokei --version
+
+      - name: Install jq (already on runner, sanity check)
+        run: jq --version
+
+      - name: Run snapshot
+        env:
+          # 公開 repo 用內建 token；私有要在 repo Secrets 加 REPO_PAT
+          GH_TOKEN: ${{ inputs.include_private && secrets.REPO_PAT || secrets.GITHUB_TOKEN }}
+          GH_USER: ${{ github.repository_owner }}
+          INCLUDE_PRIVATE: ${{ inputs.include_private && '1' || '0' }}
+        run: ./scripts/count.sh
+
+      - name: Commit history if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet data/history.json; then
+            echo "No changes to history.json"
+          else
+            git add data/history.json
+            git commit -m "chore: snapshot $(date -u +%Y-%m-%d)"
+            git push
+          fi
