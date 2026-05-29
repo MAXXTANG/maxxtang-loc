@@ -1,6 +1,6 @@
 # maxxtang-loc
 
-統計 [@MAXXTANG](https://github.com/MAXXTANG/) 在 GitHub 上累積寫了多少行程式碼 — 以「快照」方式，月度更新並保留歷史。
+統計 [@MAXXTANG](https://github.com/MAXXTANG/) 在 GitHub 上累積寫了多少行程式碼 — 以快照方式，月度更新並保留歷史。
 
 **線上查看：** https://maxxtang.github.io/maxxtang-loc/
 
