@@ -1,4 +1,114 @@
 {
   "user": "MAXXTANG",
-  "snapshots": []
+  "snapshots": [
+    {
+      "date": "2026-06-01",
+      "user": "MAXXTANG",
+      "repo_count": 8,
+      "total_lines": 5718,
+      "total_code": 3526,
+      "total_comments": 1325,
+      "total_blanks": 867,
+      "by_language": {
+        "HTML": {
+          "code": 443,
+          "comments": 28,
+          "blanks": 59
+        },
+        "JavaScript": {
+          "code": 643,
+          "comments": 126,
+          "blanks": 89
+        },
+        "Markdown": {
+          "code": 0,
+          "comments": 768,
+          "blanks": 322
+        },
+        "Shell": {
+          "code": 256,
+          "comments": 72,
+          "blanks": 37
+        },
+        "TOML": {
+          "code": 8,
+          "comments": 9,
+          "blanks": 3
+        },
+        "JSON": {
+          "code": 21,
+          "comments": 0,
+          "blanks": 0
+        },
+        "SVG": {
+          "code": 109,
+          "comments": 3,
+          "blanks": 4
+        },
+        "Arduino C++": {
+          "code": 978,
+          "comments": 216,
+          "blanks": 170
+        },
+        "C Header": {
+          "code": 192,
+          "comments": 65,
+          "blanks": 62
+        },
+        "INI": {
+          "code": 12,
+          "comments": 2,
+          "blanks": 1
+        },
+        "C++": {
+          "code": 864,
+          "comments": 36,
+          "blanks": 120
+        }
+      },
+      "by_repo": {
+        "github-loc-counter": {
+          "code": 484,
+          "comments": 218,
+          "blanks": 101
+        },
+        "maxxtang-loc": {
+          "code": 154,
+          "comments": 80,
+          "blanks": 36
+        },
+        "route-11-after-the-sea": {
+          "code": 200,
+          "comments": 56,
+          "blanks": 43
+        },
+        "EasyCam-esp32-diy": {
+          "code": 1242,
+          "comments": 392,
+          "blanks": 243
+        },
+        "ESP32S3_PrintServer": {
+          "code": 1192,
+          "comments": 452,
+          "blanks": 330
+        },
+        "han-audio-extractor": {
+          "code": 68,
+          "comments": 19,
+          "blanks": 22
+        },
+        "WavLink": {
+          "code": 102,
+          "comments": 50,
+          "blanks": 29
+        },
+        "color-palette-tool": {
+          "code": 84,
+          "comments": 58,
+          "blanks": 63
+        }
+      }
+    }
+  ],
+  "updated_at": "2026-06-01T08:39:46Z"
 }
