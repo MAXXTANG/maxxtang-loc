@@ -108,7 +108,140 @@
           "blanks": 63
         }
       }
+    },
+    {
+      "date": "2026-07-01",
+      "user": "MAXXTANG",
+      "repo_count": 11,
+      "total_lines": 6914,
+      "total_code": 4245,
+      "total_comments": 1634,
+      "total_blanks": 1035,
+      "by_language": {
+        "HTML": {
+          "code": 599,
+          "comments": 28,
+          "blanks": 73
+        },
+        "JSON": {
+          "code": 141,
+          "comments": 0,
+          "blanks": 0
+        },
+        "Markdown": {
+          "code": 0,
+          "comments": 1026,
+          "blanks": 428
+        },
+        "C": {
+          "code": 191,
+          "comments": 16,
+          "blanks": 19
+        },
+        "C Header": {
+          "code": 220,
+          "comments": 75,
+          "blanks": 66
+        },
+        "Python": {
+          "code": 129,
+          "comments": 7,
+          "blanks": 13
+        },
+        "SVG": {
+          "code": 180,
+          "comments": 16,
+          "blanks": 14
+        },
+        "Shell": {
+          "code": 280,
+          "comments": 77,
+          "blanks": 39
+        },
+        "JavaScript": {
+          "code": 643,
+          "comments": 126,
+          "blanks": 89
+        },
+        "TOML": {
+          "code": 8,
+          "comments": 9,
+          "blanks": 3
+        },
+        "Arduino C++": {
+          "code": 978,
+          "comments": 216,
+          "blanks": 170
+        },
+        "INI": {
+          "code": 12,
+          "comments": 2,
+          "blanks": 1
+        },
+        "C++": {
+          "code": 864,
+          "comments": 36,
+          "blanks": 120
+        }
+      },
+      "by_repo": {
+        "wealth-dashboard-appsscript-template": {
+          "code": 166,
+          "comments": 112,
+          "blanks": 58
+        },
+        "ruview-xiao": {
+          "code": 443,
+          "comments": 138,
+          "blanks": 79
+        },
+        "CardPuter-ADV-Doom": {
+          "code": 0,
+          "comments": 59,
+          "blanks": 31
+        },
+        "maxxtang-loc": {
+          "code": 264,
+          "comments": 80,
+          "blanks": 36
+        },
+        "github-loc-counter": {
+          "code": 484,
+          "comments": 218,
+          "blanks": 101
+        },
+        "route-11-after-the-sea": {
+          "code": 200,
+          "comments": 56,
+          "blanks": 43
+        },
+        "EasyCam-esp32-diy": {
+          "code": 1242,
+          "comments": 392,
+          "blanks": 243
+        },
+        "ESP32S3_PrintServer": {
+          "code": 1192,
+          "comments": 452,
+          "blanks": 330
+        },
+        "han-audio-extractor": {
+          "code": 68,
+          "comments": 19,
+          "blanks": 22
+        },
+        "WavLink": {
+          "code": 102,
+          "comments": 50,
+          "blanks": 29
+        },
+        "color-palette-tool": {
+          "code": 84,
+          "comments": 58,
+          "blanks": 63
+        }
+      }
     }
   ],
-  "updated_at": "2026-06-01T08:39:46Z"
+  "updated_at": "2026-07-01T07:16:04Z"
 }
