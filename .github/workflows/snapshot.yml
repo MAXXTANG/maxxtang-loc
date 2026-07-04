@@ -13,11 +13,16 @@ on:
 
 permissions:
   contents: write    # 要 commit 回 history.json
+  pages: write
+  id-token: write
 
 jobs:
   snapshot:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
@@ -53,3 +58,20 @@ jobs:
             git commit -m "chore: snapshot $(date -u +%Y-%m-%d)"
             git push
           fi
+
+      - name: Build site (copy data into docs/)
+        run: |
+          mkdir -p docs/data
+          cp data/history.json docs/data/history.json
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
