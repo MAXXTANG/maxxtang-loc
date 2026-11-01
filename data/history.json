@@ -670,7 +670,185 @@
           "blanks": 63
         }
       }
+    },
+    {
+      "date": "2026-11-01",
+      "user": "MAXXTANG",
+      "repo_count": 16,
+      "total_lines": 36167,
+      "total_code": 26475,
+      "total_comments": 6179,
+      "total_blanks": 3513,
+      "by_language": {
+        "Arduino C++": {
+          "code": 1398,
+          "comments": 226,
+          "blanks": 191
+        },
+        "C Header": {
+          "code": 3186,
+          "comments": 759,
+          "blanks": 209
+        },
+        "C++": {
+          "code": 14302,
+          "comments": 2000,
+          "blanks": 1165
+        },
+        "CSS": {
+          "code": 2,
+          "comments": 0,
+          "blanks": 0
+        },
+        "HTML": {
+          "code": 652,
+          "comments": 28,
+          "blanks": 73
+        },
+        "JSON": {
+          "code": 1211,
+          "comments": 0,
+          "blanks": 0
+        },
+        "JavaScript": {
+          "code": 817,
+          "comments": 126,
+          "blanks": 89
+        },
+        "Markdown": {
+          "code": 0,
+          "comments": 2481,
+          "blanks": 1072
+        },
+        "Python": {
+          "code": 2705,
+          "comments": 37,
+          "blanks": 324
+        },
+        "SVG": {
+          "code": 205,
+          "comments": 16,
+          "blanks": 14
+        },
+        "Shell": {
+          "code": 340,
+          "comments": 81,
+          "blanks": 39
+        },
+        "Swift": {
+          "code": 1052,
+          "comments": 307,
+          "blanks": 284
+        },
+        "C": {
+          "code": 466,
+          "comments": 24,
+          "blanks": 24
+        },
+        "CMake": {
+          "code": 79,
+          "comments": 2,
+          "blanks": 1
+        },
+        "INI": {
+          "code": 52,
+          "comments": 5,
+          "blanks": 7
+        },
+        "Plain Text": {
+          "code": 0,
+          "comments": 78,
+          "blanks": 18
+        },
+        "TOML": {
+          "code": 8,
+          "comments": 9,
+          "blanks": 3
+        }
+      },
+      "by_repo": {
+        "epaper-badge-waveshare-154g": {
+          "code": 14286,
+          "comments": 2892,
+          "blanks": 1417
+        },
+        "OpenFault-Lab": {
+          "code": 1290,
+          "comments": 450,
+          "blanks": 263
+        },
+        "Heltec-V3-Weather": {
+          "code": 2428,
+          "comments": 344,
+          "blanks": 137
+        },
+        "maxxtang-loc": {
+          "code": 826,
+          "comments": 80,
+          "blanks": 36
+        },
+        "claude-stick-buddy": {
+          "code": 2371,
+          "comments": 341,
+          "blanks": 246
+        },
+        "heltec-wireless-paper-meshtastic-map": {
+          "code": 1293,
+          "comments": 518,
+          "blanks": 415
+        },
+        "ruview-xiao": {
+          "code": 443,
+          "comments": 138,
+          "blanks": 79
+        },
+        "wealth-dashboard-appsscript-template": {
+          "code": 166,
+          "comments": 112,
+          "blanks": 58
+        },
+        "CardPuter-ADV-Doom": {
+          "code": 0,
+          "comments": 59,
+          "blanks": 31
+        },
+        "github-loc-counter": {
+          "code": 484,
+          "comments": 218,
+          "blanks": 101
+        },
+        "route-11-after-the-sea": {
+          "code": 200,
+          "comments": 56,
+          "blanks": 43
+        },
+        "EasyCam-esp32-diy": {
+          "code": 1242,
+          "comments": 392,
+          "blanks": 243
+        },
+        "ESP32S3_PrintServer": {
+          "code": 1192,
+          "comments": 452,
+          "blanks": 330
+        },
+        "han-audio-extractor": {
+          "code": 68,
+          "comments": 19,
+          "blanks": 22
+        },
+        "WavLink": {
+          "code": 102,
+          "comments": 50,
+          "blanks": 29
+        },
+        "color-palette-tool": {
+          "code": 84,
+          "comments": 58,
+          "blanks": 63
+        }
+      }
     }
   ],
-  "updated_at": "2026-10-01T09:56:21Z"
+  "updated_at": "2026-11-01T10:15:53Z"
 }
